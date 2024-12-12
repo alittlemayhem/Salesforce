@@ -16,9 +16,7 @@ public class ContactsTest extends BaseTest{
                 .isPageOpened()
                 .login("tborodich@tms.sandbox", "Password001");
 
-        String result = contactPage.open()
-                .isPageOpened()
-                .open()
+        String result = newContactModal.open()
                 .isPageOpened()
                 .fillContactInfo(contact)
                 .fillAddressInfo(contact)

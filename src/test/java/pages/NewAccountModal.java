@@ -21,7 +21,7 @@ public class NewAccountModal extends BasePage {
     }
 
     public NewAccountModal open() {
-        driver.get("https://tms9-dev-ed.develop.lightning.force.com/lightning/o/Account/list?filterName=__Recent");
+        driver.get("https://tms9-dev-ed.develop.lightning.force.com/lightning/o/Account/list?filterName=AllAccounts");
         driver.findElement(By.xpath("//div[@title='New']")).click();
         return this;
     }

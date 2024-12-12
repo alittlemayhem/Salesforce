@@ -18,11 +18,8 @@ public class AccountsTest extends BaseTest {
                 .isPageOpened()
                 .login("tborodich@tms.sandbox", "Password001");
 
-        String result = accountPage.open()
+        String result = newAccountModal.open()
                 .isPageOpened()
-                .open()
-                .isPageOpened()
-                .fillAccountInfo(account)
                 .fillAccountInfo(account)
                 .fillAddressInfo(account)
                 .fillAdditionalInfo(account)

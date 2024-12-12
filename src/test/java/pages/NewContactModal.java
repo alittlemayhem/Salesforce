@@ -16,7 +16,7 @@ public class NewContactModal extends BasePage {
 
     @Override
     public NewContactModal isPageOpened() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='slds-page-header__name-meta']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2//parent::div[@class='slds-modal__header']")));
         return this;
     }
 
