@@ -6,8 +6,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
-import pages.LoginPage;
-import pages.NewAccountModal;
+import pages.*;
+import steps.AccountStep;
+import steps.LoginStep;
 
 import java.time.Duration;
 
@@ -16,6 +17,11 @@ public class BaseTest {
     WebDriver driver;
     LoginPage loginPage;
     NewAccountModal newAccountModal;
+    LoginStep loginStep;
+    AccountStep accountStep;
+    NewContactModal newContactModal;
+    AccountPage accountPage;
+    ContactPage contactPage;
 
     @Parameters({"browser"})
     @BeforeMethod
@@ -35,6 +41,11 @@ public class BaseTest {
 
         loginPage = new LoginPage(driver);
         newAccountModal = new NewAccountModal(driver);
+        loginStep = new LoginStep(driver);
+        accountStep = new AccountStep(driver);
+        newContactModal = new NewContactModal(driver);
+        accountPage = new AccountPage(driver);
+        contactPage = new ContactPage(driver);
     }
 
     @AfterMethod(alwaysRun = true)
