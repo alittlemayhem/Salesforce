@@ -76,4 +76,10 @@ public class AccountFactory {
                 faker.lorem().paragraph()
         );
     }
+
+    public Account getAccountWithRequiredFields() {
+        return Account.builder()
+                .accountName(faker.company().name())
+                .build();
+    }
 }

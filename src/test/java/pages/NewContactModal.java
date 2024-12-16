@@ -1,6 +1,7 @@
 package pages;
 
 import dto.Contact;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,23 +11,28 @@ import wrappers.Textarea;
 
 public class NewContactModal extends BasePage {
 
+    private final String NEW_CONTACT_HEADER = "//h2//parent::div[@class='slds-modal__header']";
+    private final String NEW_CONTACT_BUTTON = "//div[@title='New']";
+    private final String SAVE_BUTTON = "//button[@name='SaveEdit']";
+
     public NewContactModal(WebDriver driver) {
         super(driver);
     }
 
     @Override
     public NewContactModal isPageOpened() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2//parent::div[@class='slds-modal__header']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(NEW_CONTACT_HEADER)));
         return this;
     }
 
     @Override
     public NewContactModal open() {
-        driver.get("https://tms9-dev-ed.develop.lightning.force.com/lightning/o/Contact/pipelineInspection?filterName=00BWU00000Gou2b2AB");
-        driver.findElement(By.xpath("//button[@name='NewContact']")).click();
+        driver.get("https://tms9-dev-ed.develop.lightning.force.com/lightning/o/Contact/list?filterName=__Recent");
+        driver.findElement(By.xpath(NEW_CONTACT_BUTTON)).click();
         return this;
     }
 
+    @Step("Fill only first part of window.")
     public NewContactModal fillContactInfo(Contact contact) {
         new PickList(driver, "Salutation").select(contact.getSalutation());
         new Input(driver, "First Name").write(contact.getFirstName());
@@ -48,6 +54,7 @@ public class NewContactModal extends BasePage {
         return this;
     }
 
+    @Step("Fill address part of window.")
     public NewContactModal fillAddressInfo(Contact contact) {
         new Textarea(driver, "Mailing Street").write(contact.getMailingStreet());
         new Input(driver, "Mailing City").write(contact.getMailingCity());
@@ -62,19 +69,22 @@ public class NewContactModal extends BasePage {
         return this;
     }
 
+    @Step("Fill additional info part of window.")
     public NewContactModal fillAdditionalInfo(Contact contact) {
         new Input(driver, "Languages").write(contact.getLanguages());
         new PickList(driver, "Level").select(contact.getLevel());
         return this;
     }
 
+    @Step("Fill description part of window.")
     public NewContactModal fillDescription(Contact contact) {
         new Textarea(driver, "Description").write(contact.getDescription());
         return this;
     }
 
+    @Step("Create new contact.")
     public ContactPage createContact() {
-        driver.findElement(By.xpath("//button[@name='SaveEdit']")).click();
+        driver.findElement(By.xpath(SAVE_BUTTON)).click();
         return new ContactPage(driver);
     }
 }

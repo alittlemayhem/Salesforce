@@ -36,7 +36,7 @@ public class ContactFactory {
         return items[random.nextInt(items.length)];
     }
 
-    public Contact getContact(String reportsTo, String accountName) {
+    public Contact getContactWithAllFields(String reportsTo, String accountName) {
         return new Contact(
                 getRandomPicklistItem("Salutation"),
                 faker.name().firstName(),
@@ -69,5 +69,11 @@ public class ContactFactory {
                 getRandomPicklistItem("Level"),
                 faker.lorem().paragraph()
         );
+    }
+
+    public Contact getContactWithRequiredFields() {
+        return Contact.builder()
+                .lastName(faker.name().lastName())
+                .build();
     }
 }
